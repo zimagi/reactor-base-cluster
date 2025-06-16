@@ -32,6 +32,7 @@
 /env/*/output.*.json
 /env/*/*.tfstate
 /env/*/*.tfstate.backup
+/projects/
 /certs/
 /logs/
 /cache/
