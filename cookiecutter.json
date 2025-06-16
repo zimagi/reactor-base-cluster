@@ -91,8 +91,7 @@
     "aws_container_read_group": "AWS ECR image accessor IAM user group"
   },
   "_copy_without_render": [
-    "argocd",
-    "projects",
+    "deploy",
     "reactor",
     ".gitignore",
     "LICENSE"
