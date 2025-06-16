@@ -4,48 +4,53 @@ domain:
   local: "{{cookiecutter.local_domain}}"
   prod: "{{cookiecutter.prod_domain}}"
 #
+# Reactor extension projects (map of extensions)
+#
+# ** Add Reactor commands and utilities, Docker images, and Helm charts
+#
+# {extension_name}:
+#   remote: (https://|git@)example.com(/|:)project.git (REQUIRED)
+#   reference: (branch|tag) (main)
+#   directory: directory within top level projects directory (defaults to key)
+#
+extensions:
+  reactor_charts:
+    remote: https://github.com/kube-reactor/charts.git
+    reference: main
+    directory: charts/reactor
+
+  aws_state:
+    remote: https://github.com/kube-reactor/extension-aws-state.git
+    reference: main
+    directory: kubernetes/aws_state
+  aws_eks:
+    remote: https://github.com/kube-reactor/extension-aws-eks.git
+    reference: main
+    directory: kubernetes/aws_eks
+  cloudflare_dns:
+    remote: https://github.com/kube-reactor/extension-cloudflare-dns.git
+    reference: main
+    directory: dns/cloudflare
+#
 # Docker image projects (map of images)
 #
 # {image_name}:
-#   project: relative_directory to docker directory (defaults to key)
-#   remote: (https://|git@)example.com(/|:)project.git
-#   reference: (branch|tag)
-#   docker_dir: relative_path/to/dockerfile
-#   docker_tag: docker_build_tag
+#   extension: extension name containing Docker image (defaults to key)
+#   directory: relative_path/to/dockerfile (docker)
+#   file: Dockerfile file name (Dockerfile)
+#   tag: docker_build_tag (dev)
+#   args: location of Docker build args script within project reactor directory (build_image)
 #
 docker: {}
 #
 # Helm chart projects (map of charts)
 #
 # {chart_name}:
-#   project: relative_directory to charts directory (defaults to key)
-#   app: argocd_app_name (name field in info.yml)
-#   remote: (https://|git@)example.com(/|:)project.git
-#   reference: (branch|tag)
-#   chart_dir: relative_path/to/chart
+#   extension: extension name containing Helm chart (defaults to key)
+#   application: argocd_app_name (name field in info.yml) (defaults to key)
+#   directory: relative_path/to/chart (charts/{key})
 #
 charts:
   reactor:
-    remote: https://github.com/kube-reactor/charts.git
-    reference: main
+    extension: reactor_charts
     chart_dir: charts/application
-#
-# Reactor extension projects (map of extensions)
-#
-# ** Add reactor commands and utilities
-# ** Should contain a 'reactor' top level directory
-#
-# {extension_name}:
-#   remote: (https://|git@)example.com(/|:)project.git
-#   reference: (branch|tag)
-#
-extensions:
-  aws_state:
-    remote: https://github.com/kube-reactor/extension-aws-state.git
-    reference: main
-  aws_eks:
-    remote: https://github.com/kube-reactor/extension-aws-eks.git
-    reference: main
-  cloudflare_dns:
-    remote: https://github.com/kube-reactor/extension-cloudflare-dns.git
-    reference: main

@@ -33,9 +33,6 @@
 /env/*/*.tfstate
 /env/*/*.tfstate.backup
 /certs/
-/extensions/
-/docker/
-/charts/
 /logs/
 /cache/
 
